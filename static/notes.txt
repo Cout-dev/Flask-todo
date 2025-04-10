@@ -1,0 +1,76 @@
+pip install virtualenv
+virtualenv env
+.\env\Scripts\activate.ps1 (every time new terminal)
+pip install flask
+
+
+new folder  - app.py
+
+flask minimal app  -> from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+
+if __name__ == "__main__":
+    app.run(debug=True) 
+
+
+2 more folder  - 
+static - to make static files
+templates - index.html ==
+
+@app.route("/htmls")
+def htmls():
+    return render_template("index.html") 
+
+
+from app import app, db
+
+with app.app_context():
+    db.create_all()
+
+
+
+
+class HelloWorld (Resource):
+    def get(self):
+        return {'data': 'Hello, World!'}
+class HelloName (Resource):
+    def get(self, name):
+    return {'data': 'Hello, {}'.format(name)}
+    
+api.add_resource (HelloWorld, '/helloworld')
+api.add_resource(HelloName, '/helloworld/<string:name>')
+
+
+
+ todos = {
+    1: {"task": "Write Hello World Program", "summary": "write the code using python."},
+    2: {"task": "Task 2", "summary": "writing task 2."},
+    3: {"task": "Task 3", "summary": "this is task 3."},
+ }
+
+ task_post_args reqparse.RequestParser()
+ task_post_args.add_argument("summary", type-str, help="Summary is required.", required=True)
+ task_post_args.add_argument("task", type-str, help="Task is required.", required=True)
+
+ class ToDoList(Resource):
+    def get(self):
+        return todos
+
+ class ToDo (Resource):
+    def get(self, todo_id):
+        return todos[todo_id]
+
+    def post(self, todo_id):
+        args task_post_args.parse_args()
+        if todo_id in todos:
+            abort(409, "Task ID already taken")
+            
+        todos[todo_id] = {"task": args["task"], "summary": args["summary"]}
+
+api.add_resource(ToDo, '/todos/<int:todo_id>')
+ api.add_resource(ToDoList, '/todos')
