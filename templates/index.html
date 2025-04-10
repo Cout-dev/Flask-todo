@@ -92,11 +92,10 @@
                         <a href="/update/{{todo.sno}}" class="btn btn-warning btn-sm mx-1">Update</a>
                         <a href="/delete/{{todo.sno}}" class="btn btn-danger btn-sm mx-1">Delete</a>
                     </td>
-                    
-                  </tr> 
-            </tbody>
+                </tr>
+                {% endfor %}
+                </tbody>
           </table>
-          {% endfor %}
           {% endif %}
 
       </div>
